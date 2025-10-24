@@ -1,22 +1,19 @@
 import requests
 from flask import current_app
 
-def query_sfgov(query: str, page: dict) -> dict:
+from api.vendors.models.data import Pagination
+
+def query_sfgov(request_body: str) -> dict:
     """
-    Utility to make a POST request to the SFGov API.
+    Utility to query the SFGov API.
     Handles URL construction and token fetching.
     Args:
-        query (str): SQL query string.
-        page (dict): Dict with 'pageNumber' and 'pageSize'.
+        request_body (str): REST API request body.
     Returns:
         dict: JSON response from SFGov API.
     """
     app_token = current_app.config['DATASF_APP_TOKEN']
     url = f'https://data.sfgov.org/api/v3/views/rqzj-sfat/query.json?app_token={app_token}'
-    body = {
-        "query": query,
-        "page": page
-    }
-    response = requests.post(url, json=body)
+    response = requests.post(url, json=request_body)
     response.raise_for_status()
     return response.json()
