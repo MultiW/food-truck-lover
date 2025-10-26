@@ -1,8 +1,6 @@
 import requests
 from flask import current_app
 
-from api.vendors.models.data import Pagination
-
 def query_sfgov(request_body: str) -> dict:
     """
     Utility to query the SFGov API.

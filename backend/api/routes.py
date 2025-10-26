@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, current_app, request
-from api.vendors.models.data import Pagination, VendorFilter
+from api.models.data import Pagination, VendorFilter
 from pydantic import ValidationError
-import api.vendors.service.service as vendor_service
+import api.service.service as vendor_service
 
 vendors_bp = Blueprint('vendors', __name__, url_prefix='/vendors')
 

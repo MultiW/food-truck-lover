@@ -1,5 +1,5 @@
-from api.vendors.models.data import Pagination, Vendor, VendorFilter
-from api.vendors.service.sfgov_service import query_sfgov
+from api.models.data import Pagination, Vendor, VendorFilter
+from api.service.sfgov_service import query_sfgov
 
 def search_vendors(filter: VendorFilter, pagination: Pagination) -> list[Vendor]:
     data = query_sfgov({
