@@ -12,5 +12,16 @@ services:
       - db_data:/var/lib/postgresql
     ports:
       - "5432:5432"
+  backend:
+    build: .
+    container_name: food_truck_lover_backend
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8000:5000"
+    volumes:
+      - ./:/app
 volumes:
   db_data:

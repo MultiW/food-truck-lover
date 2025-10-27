@@ -1,9 +1,5 @@
-from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-from database.base import Base
-
-load_dotenv(override=True)
-# TODO: set PYTHON_DOTENV_DISABLED=1 to disable in production
+from api.database.base import Base
 
 from flask import Flask
 from config import Config
