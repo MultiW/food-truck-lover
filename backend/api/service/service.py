@@ -27,6 +27,5 @@ def build_query(filter: VendorFilter) -> str:
 
     if conditions:
         query += " WHERE " + " AND ".join(conditions)
-    print(query)
 
     return query

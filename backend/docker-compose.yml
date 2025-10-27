@@ -1,0 +1,16 @@
+services:
+  db:
+    platform: linux/amd64 # Ensure compatibility on Apple Silicon. Remove if on a device with amd64 processors.
+    image: postgis/postgis:18-3.6
+    container_name: food_truck_lover_db
+    restart: always
+    environment:
+      POSTGRES_DB: food_truck_lover
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+volumes:
+  db_data:
