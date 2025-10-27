@@ -5,7 +5,7 @@ class Coordinate(BaseModel):
     longitude: float = Field(..., ge=-180, le=180, description="Longitude must be between -180 and 180")
 
 class LocationFilter(BaseModel):
-    coordinates: Coordinate = Field(..., description="Coordinates are required for location filter")
+    location: Coordinate = Field(..., description="Coordinates are required for location filter")
     result_size: int = Field(..., gt=0, le=10000, description="Result size must be between 1 and 10,000")
 
 class Pagination(BaseModel):
@@ -21,4 +21,4 @@ class Vendor(BaseModel):
     id: int = Field(...)
     name: str = Field(...)
     address: str = Field(...)
-    coordinate: Coordinate = Field(None)
+    location: Coordinate = Field(None)

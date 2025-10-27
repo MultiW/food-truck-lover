@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import os
 from sqlalchemy import create_engine
 import pandas as pd
@@ -5,9 +6,11 @@ from sqlalchemy.orm import Session
 from geoalchemy2.shape import from_shape
 from shapely.geometry import Point
 
-from api.database import *  # load all DB model definitions
+from api.database import * # load all DB model definitions
 from api.database.base import Base
 from api.database.vendor_model import VendorModel
+
+load_dotenv(override=True)
 
 sqlalchemy_database_uri = os.environ.get('SQLALCHEMY_DATABASE_URI')
 if not sqlalchemy_database_uri:
@@ -33,7 +36,7 @@ with Session(engine) as session:
         vendor = VendorModel(
             name=row['Applicant'],
             address=row['Address'],
-            location=point
+            coordinates=point
         )
         session.add(vendor)
     session.commit()

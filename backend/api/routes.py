@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify, current_app, request
-from api.models.data import Pagination, VendorFilter
+from flask import Blueprint, jsonify, request
+from api.models.data import Pagination, Vendor, VendorFilter
 from pydantic import ValidationError
 import api.service.service as vendor_service
 
@@ -23,4 +23,5 @@ def search_vendors():
     except ValidationError as e:
         return jsonify({"errors": e.errors()}), 400
 
-    return jsonify({"data": vendor_service.search_vendors(vendorFilter, pagination)})
+    vendors: list[Vendor] = vendor_service.search_vendors(vendorFilter, pagination)
+    return jsonify({"data": [v.model_dump() for v in vendors]})

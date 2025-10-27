@@ -4,6 +4,8 @@ from api.database.base import Base
 from flask import Flask
 from config import Config
 
+db = SQLAlchemy(model_class=Base)
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -11,7 +13,6 @@ def create_app(config_class=Config):
     from api.routes import vendors_bp
     app.register_blueprint(vendors_bp)
 
-    db = SQLAlchemy(model_class=Base)
     db.init_app(app)
 
     return app
