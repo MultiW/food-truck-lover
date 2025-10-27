@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_DB: food_truck_lover
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: password
     volumes:
       - db_data:/var/lib/postgresql
     ports:
@@ -17,6 +17,8 @@ services:
     container_name: food_truck_lover_backend
     depends_on:
       - db
+    environment:
+      PYTHONPATH: /app
     env_file:
       - .env
     ports:
