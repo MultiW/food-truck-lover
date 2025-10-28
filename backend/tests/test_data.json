@@ -1,14 +1,102 @@
 [
   {
+    "id": 1,
     "name": "Tasty Truck",
     "address": "123 Main St",
     "status": "APPROVED",
-    "location": "POINT(-122.4194 37.7749)"
+    "location": {
+      "latitude": -40.0,
+      "longitude": 40.0
+    }
   },
   {
+    "id": 2,
     "name": "Yummy Wheels",
     "address": "456 Market St",
+    "status": "APPROVED",
+    "location": {
+      "latitude": -30.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 3,
+    "name": "Burger Bus",
+    "address": "789 Broadway",
+    "status": "APPROVED",
+    "location": {
+      "latitude": -20.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 4,
+    "name": "Pizza Palace",
+    "address": "1010 Pine St",
+    "status": "APPROVED",
+    "location": {
+      "latitude": -10.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 5,
+    "name": "Sushi Station",
+    "address": "2020 Oak St",
+    "status": "APPROVED",
+    "location": {
+      "latitude": 0.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 6,
+    "name": "Taco Town",
+    "address": "3030 Maple Ave",
     "status": "REQUESTED",
-    "location": "POINT(-122.4180 37.7750)"
+    "location": {
+      "latitude": 10.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 7,
+    "name": "Falafel Factory",
+    "address": "4040 Cedar Rd",
+    "status": "ISSUED",
+    "location": {
+      "latitude": 20.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 8,
+    "name": "Crepe Corner",
+    "address": "5050 Spruce Ln",
+    "status": "EXPIRED",
+    "location": {
+      "latitude": 30.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 9,
+    "name": "Waffle Wagon",
+    "address": "6060 Elm St",
+    "status": "SUSPEND",
+    "location": {
+      "latitude": 40.0,
+      "longitude": 40.0
+    }
+  },
+  {
+    "id": 10,
+    "name": "Gyro Grill",
+    "address": "7070 Birch Blvd",
+    "status": "REQUESTED",
+    "location": {
+      "latitude": 50.0,
+      "longitude": 40.0
+    }
   }
 ]

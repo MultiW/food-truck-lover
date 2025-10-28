@@ -1,6 +1,9 @@
+import json
+from geoalchemy2.shape import from_shape
+from shapely.geometry import Point
+
 from api.database.vendor_model import VendorModel
 from api.models.data import ApplicationStatus
-import json
 
 def seed_vendors(db_session):
     """
@@ -23,11 +26,14 @@ def load_vendors_from_json(json_path: str) -> list[VendorModel]:
         vendor_data = json.load(f)
     vendors: list[VendorModel] = []
     for v in vendor_data:
+        lat = v['location']['latitude']
+        lon = v['location']['longitude']
+        point = from_shape(Point(lon, lat), srid=4326)
         vendor = VendorModel(
             name=v["name"],
             address=v["address"],
             status=ApplicationStatus[v["status"]],
-            location=v["location"]
+            location=point
         )
         vendors.append(vendor)
     return vendors
