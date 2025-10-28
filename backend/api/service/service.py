@@ -36,10 +36,11 @@ def _execute_database_query(filter: VendorFilter, pagination: Pagination) -> lis
     if filter.address:
         query = query.filter(VendorModel.address.ilike(f"%{filter.address}%"))
 
-    # TODO apply "approved" filter
+    if filter.status:
+        query = query.filter(VendorModel.status == filter.status)
 
     if filter.locationFilter:
-        query = _filterLocation(filter)
+        query = _filterLocation(query, filter)
         # Override pagination for location-based search
         limit = filter.locationFilter.result_size
         offset = 0
@@ -49,13 +50,11 @@ def _execute_database_query(filter: VendorFilter, pagination: Pagination) -> lis
 
     return query.all()
 
-def _filterLocation(filter: VendorFilter) -> Query[VendorModel]:
+def _filterLocation(query: Query[VendorModel], filter: VendorFilter) -> Query[VendorModel]:
     lat = filter.locationFilter.location.latitude
     lon = filter.locationFilter.location.longitude
     target_point = func.ST_SetSRID(func.ST_MakePoint(lon, lat), SRID)
-    query = db.session.query(VendorModel).order_by(VendorModel.location.op('<->')(target_point))
-        
-    return query
+    return query.order_by(VendorModel.location.op('<->')(target_point))
 
 def _map_results_to_vendors(results: list[VendorModel]) -> list[Vendor]:
     """
@@ -65,8 +64,6 @@ def _map_results_to_vendors(results: list[VendorModel]) -> list[Vendor]:
     for vendorModel in results:
         # Convert geometry to Coordinate if location is present
         location: Coordinate = None
-        print("HIHI", flush=True)
-        print(vendorModel, flush=True)
         if vendorModel.location:
             try:
                 location = Coordinate.model_validate({
@@ -79,8 +76,8 @@ def _map_results_to_vendors(results: list[VendorModel]) -> list[Vendor]:
             "id": vendorModel.id,
             "name": vendorModel.name,
             "address": vendorModel.address,
+            "status": vendorModel.status,
+            "location": location,
         }
-        if location is not None:
-            vendor_dict["location"] = location
         vendors.append(Vendor.model_validate(vendor_dict))
     return vendors

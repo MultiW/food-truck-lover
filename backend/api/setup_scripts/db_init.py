@@ -33,6 +33,7 @@ with Session(engine) as session:
         vendor = VendorModel(
             name=row['Applicant'],
             address=row['Address'],
+            status=row['Status'],
             location=point
         )
         session.add(vendor)
