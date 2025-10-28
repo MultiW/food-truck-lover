@@ -21,7 +21,7 @@ def search_vendors():
         vendorFilter = VendorFilter(**requestBody)
 
     except ValidationError as e:
-        return jsonify({"errors": e.errors()}), 400
+        raise e
 
     vendors: list[Vendor] = vendor_service.search_vendors(vendorFilter, pagination)
     return jsonify({"data": [v.model_dump() for v in vendors]})

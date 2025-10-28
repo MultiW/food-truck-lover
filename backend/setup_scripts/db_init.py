@@ -15,8 +15,7 @@ if not sqlalchemy_database_uri:
 engine = create_engine(sqlalchemy_database_uri)
 
 # Create schema
-metadata = Base.metadata
-metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 # Populate with data
 csv_path = os.path.join(os.path.dirname(__file__), "Mobile_Food_Facility_Permit.csv")

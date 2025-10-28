@@ -7,7 +7,6 @@ def test_pagination_validation(client):
     """
     response = client.post('/vendors/', json={})
     assert response.status_code == 400
-    assert "errors" in response.json
 
 def test_pagination_works(client):
     """
@@ -41,7 +40,6 @@ def test_location_filter_validation(client):
     }
     response = client.post('/vendors/?page=1&page_size=10', json=bad_location_lat)
     assert response.status_code == 400
-    assert "errors" in response.json
 
     # Missing longitude
     bad_location_lon = {
@@ -54,7 +52,6 @@ def test_location_filter_validation(client):
     }
     response = client.post('/vendors/?page=1&page_size=10', json=bad_location_lon)
     assert response.status_code == 400
-    assert "errors" in response.json
 
     # Missing result_size
     bad_location_rs = {
@@ -67,7 +64,6 @@ def test_location_filter_validation(client):
     }
     response = client.post('/vendors/?page=1&page_size=10', json=bad_location_rs)
     assert response.status_code == 400
-    assert "errors" in response.json
 
 # ==================================
 # === Test Filters Functionality ===

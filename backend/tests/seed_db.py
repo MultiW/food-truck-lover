@@ -2,16 +2,17 @@ import json
 from geoalchemy2.shape import from_shape
 from shapely.geometry import Point
 
+from api import db
 from api.database.vendor_model import VendorModel
 from api.models.data import ApplicationStatus
 
-def seed_vendors(db_session):
+def seed_database():
     """
     Adds a set of predefined vendors to the database.
     """
     vendors: list[VendorModel] = load_vendors_from_json("tests/test_data.json")
-    db_session.add_all(vendors)
-    db_session.commit()
+    db.session.add_all(vendors)
+    db.session.commit()
 
 def load_vendors_from_json(json_path: str) -> list[VendorModel]:
     """
