@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Tasty Truck",
+    "address": "123 Main St",
+    "status": "APPROVED",
+    "location": "POINT(-122.4194 37.7749)"
+  },
+  {
+    "name": "Yummy Wheels",
+    "address": "456 Market St",
+    "status": "REQUESTED",
+    "location": "POINT(-122.4180 37.7750)"
+  }
+]
