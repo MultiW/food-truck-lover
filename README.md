@@ -182,7 +182,7 @@ Content-Type: application/json
 
 {
   "vendor_name": "truly",
-  "address": ""
+  "address": "",
   "status": "APPROVED"
 }
 ```
