@@ -1,6 +1,6 @@
 from api.models.pagination import Pagination
 from api.models.vendor import Vendor
-from api.models.filters import VendorFilter
+from api.models.filters import VendorSearchRequest
 from api.models.coordinate import Coordinate
 from sqlalchemy import func
 from api.database.vendor_model import VendorModel
@@ -9,7 +9,7 @@ from sqlalchemy.orm import Query
 
 SRID=4326
 
-def search_vendors(filter: VendorFilter, pagination: Pagination) -> list[Vendor]:
+def search_vendors(filter: VendorSearchRequest, pagination: Pagination) -> list[Vendor]:
     """
     Search for vendors based on the provided filter and pagination.
 
@@ -23,7 +23,7 @@ def search_vendors(filter: VendorFilter, pagination: Pagination) -> list[Vendor]
     results: list[VendorModel] = _execute_database_query(filter, pagination)
     return _map_results_to_vendors(results)
 
-def _execute_database_query(filter: VendorFilter, pagination: Pagination) -> list[VendorModel]:
+def _execute_database_query(filter: VendorSearchRequest, pagination: Pagination) -> list[VendorModel]:
     """
     Query to retrieve VendorModel instances based on the provided filter and pagination.
     """
@@ -53,7 +53,7 @@ def _execute_database_query(filter: VendorFilter, pagination: Pagination) -> lis
 
     return query.all()
 
-def _filterLocation(query: Query[VendorModel], filter: VendorFilter) -> Query[VendorModel]:
+def _filterLocation(query: Query[VendorModel], filter: VendorSearchRequest) -> Query[VendorModel]:
     lat = filter.locationFilter.location.latitude
     lon = filter.locationFilter.location.longitude
     target_point = func.ST_SetSRID(func.ST_MakePoint(lon, lat), SRID)
