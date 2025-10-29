@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from .base import Base
 from geoalchemy2 import Geometry
 
-from api.models.data import ApplicationStatus
+from api.models.enums import ApplicationStatus
 
 
 class VendorModel(Base):

@@ -1,4 +1,7 @@
-from api.models.data import Pagination, Vendor, VendorFilter, Coordinate
+from api.models.pagination import Pagination
+from api.models.vendor import Vendor
+from api.models.filters import VendorFilter
+from api.models.coordinate import Coordinate
 from sqlalchemy import func
 from api.database.vendor_model import VendorModel
 from api import db

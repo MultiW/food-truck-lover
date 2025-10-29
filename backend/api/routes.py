@@ -2,7 +2,9 @@ from flask import Blueprint, jsonify, request
 from flask_pydantic_spec import Response, Request
 from pydantic import ValidationError
 
-from api.models.data import VendorFilter, Pagination, VendorListResponse
+from api.models.filters import VendorFilter
+from api.models.pagination import Pagination
+from api.models.vendor import VendorListResponse
 import api.service.service as vendor_service
 from api import spec
 

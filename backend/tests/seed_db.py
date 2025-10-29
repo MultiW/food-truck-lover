@@ -4,7 +4,7 @@ from shapely.geometry import Point
 
 from api import db
 from api.database.vendor_model import VendorModel
-from api.models.data import ApplicationStatus
+from api.models.enums import ApplicationStatus
 
 def seed_database():
     """
