@@ -1,27 +1,21 @@
 from flask import Blueprint, jsonify, request
-from api.models.data import Pagination, Vendor, VendorFilter
+from flask_pydantic_spec import Response, Request
 from pydantic import ValidationError
+
+from api.models.data import VendorFilter, Pagination, VendorListResponse
 import api.service.service as vendor_service
+from api import spec
 
 vendors_bp = Blueprint('vendors', __name__, url_prefix='/vendors')
 
 @vendors_bp.route('/', methods=['POST'])
+@spec.validate(query=Pagination, body=Request(VendorFilter), resp=Response(HTTP_200=VendorListResponse))
 def search_vendors():
-    """
-    Load vendors from the external data source. Allows filtering and pagination.
-    """
     try:
-        # Extract pagination parameters from query string
-        page = request.args.get('page', type=int)
-        page_size = request.args.get('page_size', type=int)
-        pagination = Pagination(page=page, page_size=page_size)
-
-        # Get optional filters from request body
-        requestBody = request.get_json(silent=True) or {}
-        vendorFilter = VendorFilter(**requestBody)
-
+        pagination = request.context.query  # required pagination parameters
+        vendorFilter = request.context.body or {}  # optional filter parameters
     except ValidationError as e:
         raise e
 
-    vendors: list[Vendor] = vendor_service.search_vendors(vendorFilter, pagination)
-    return jsonify({"data": [v.model_dump() for v in vendors]})
+    vendors: VendorListResponse = VendorListResponse(data=vendor_service.search_vendors(vendorFilter, pagination))
+    return jsonify(vendors.model_dump())

@@ -6,20 +6,20 @@ def test_pagination_validation(client):
     Test that pagination is required and missing pagination returns a 400 error.
     """
     response = client.post('/vendors/', json={})
-    assert response.status_code == 400
+    assert response.status_code == 422
 
 def test_pagination_works(client):
     """
     Test that pagination returns the correct number of results and correct page.
     """
     # Page 2, page_size 3
-    response = client.post('/vendors/?page=2&page_size=3', json={})
+    response = client.post('/vendors/?page=2&page_size=3')
     assert response.status_code == 200
     ids = [v["id"] for v in response.json["data"]]
     assert ids == [4, 5, 6]
 
     # Page 4, page_size 3
-    response = client.post('/vendors/?page=4&page_size=3', json={})
+    response = client.post('/vendors/?page=4&page_size=3')
     assert response.status_code == 200
     ids = [v["id"] for v in response.json["data"]]
     assert ids == [10]
@@ -39,7 +39,7 @@ def test_location_filter_validation(client):
         }
     }
     response = client.post('/vendors/?page=1&page_size=10', json=bad_location_lat)
-    assert response.status_code == 400
+    assert response.status_code == 422
 
     # Missing longitude
     bad_location_lon = {
@@ -51,7 +51,7 @@ def test_location_filter_validation(client):
         }
     }
     response = client.post('/vendors/?page=1&page_size=10', json=bad_location_lon)
-    assert response.status_code == 400
+    assert response.status_code == 422
 
     # Missing result_size
     bad_location_rs = {
@@ -63,7 +63,7 @@ def test_location_filter_validation(client):
         }
     }
     response = client.post('/vendors/?page=1&page_size=10', json=bad_location_rs)
-    assert response.status_code == 400
+    assert response.status_code == 422
 
 # ==================================
 # === Test Filters Functionality ===

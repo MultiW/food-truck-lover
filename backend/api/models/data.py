@@ -22,10 +22,10 @@ class Pagination(BaseModel):
     page_size: int = Field(..., gt=0, description="Size of each page")
 
 class VendorFilter(BaseModel):
-    vendor_name: str = Field(None, description="Vendor name case insensitive partial match")
-    address: str = Field(None, description="Address case insensitive partial match")
-    locationFilter: LocationFilter = Field(None)
-    status: ApplicationStatus = Field(None)
+    vendor_name: Optional[str] = Field(None, description="Vendor name case insensitive partial match")
+    address: Optional[str] = Field(None, description="Address case insensitive partial match")
+    locationFilter: Optional[LocationFilter] = Field(None)
+    status: Optional[ApplicationStatus] = Field(None)
 
 class Vendor(BaseModel):
     model_config = {
@@ -37,3 +37,6 @@ class Vendor(BaseModel):
     address: str = Field(...)
     location: Optional[Coordinate] = Field(None)
     status: Optional[ApplicationStatus] = Field(None)
+
+class VendorListResponse(BaseModel):
+    data: list[Vendor] = Field(...)
