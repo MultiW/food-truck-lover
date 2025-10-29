@@ -172,7 +172,7 @@ docker compose run --rm backend pytest
     - `page_size` (integer, required): Number of results per page.
   - **Response:** List of matching vendors.
 
-**Notes:** this API allows users to search for vendors based on name, address, status, and location. They can query for a paginated list of vendors. If location filters are used, then pagination is ignored and `result_size` will be followed. Name, address, and status filters can still be used in conjunction with location filters.
+**Notes:** this API allows users to search for vendors based on name, address, status, and location. They can query for a paginated list of vendors. If location filters are used, then pagination is ignored and `result_size` will be followed. Name, address, and status filters can still be used in conjunction with location filters. (In a future update, pagination query parameters and result_size should be merged. I don't see a reason to not use pagination when filtering by location.)
 
 **Sample Request 1: Search by name and status (no location filter)**
 
