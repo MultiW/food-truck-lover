@@ -203,3 +203,15 @@ Content-Type: application/json
   }
 }
 ```
+
+## Development
+
+### IDE
+
+I recommend using [Visual Studio Code](https://code.visualstudio.com/) with Python and Docker extensions.
+
+Install Python dependencies for IDE syntax support.
+
+1. Create Python virtual environment `python3 -m venv .venv`
+2. Activate the environment. Mac & Linux: `source .venv/bin/activate`
+3. Install dependencies: `pip install -r requirements.txt`
